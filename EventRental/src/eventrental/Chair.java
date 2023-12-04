@@ -11,12 +11,18 @@ import javax.swing.JOptionPane;
  *
  * @author Maven
  */
-public class Chair {
-    //chairs are $10 each 
-    public void calculateCost() {
-        int amountChairs = Integer.parseInt(JOptionPane.showInputDialog("Enter the amount of chairs you would like to rent: "));
-        double costChair = 10.00;
-        double totalChairs = costChair * amountChairs; 
-        JOptionPane.showMessageDialog(null, "Chairs Total $ " + totalChairs);
-    }
+public class Chair 
+{
+    int amountChair;
+   
+   public int getChairAmount()
+   {
+       return amountChair;
+   }
+   
+   public void setChairAmount(int chairAmount)
+   {
+       amountChair = chairAmount;
+   }
+    
 }
