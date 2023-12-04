@@ -39,8 +39,14 @@ public class EventRental
             switch (choice) 
             {
                 case "Tables and Chairs":
-                    JOptionPane.showMessageDialog(message,"You chose both"); //Placeholder
-                    //Ask how many chairs there are and calculate the tables add them to a list
+                    Chair chairz = new Chair();
+                    Table tablez = new Table();
+                    chairAmount = Integer.parseInt(JOptionPane.showInputDialog(null, "How many Chairs do you need?", "Event Planner", JOptionPane.QUESTION_MESSAGE));
+                    chairz.setChairAmount(chairAmount);
+                    tableAmount = Calculations.CalculateTableAmount(chairAmount);
+                    tablez.setTableAmount(tableAmount);
+                    tables.add(tablez);
+                    chairs.add(chairz);
                     break;
                 case "Tables or Chairs":
                     userChoice = (String)JOptionPane.showInputDialog(null, "Choose Tables or Chairs", "Event Planner", JOptionPane.QUESTION_MESSAGE, null, tablesOrChairsChoice,  tablesOrChairsChoice[0]);
