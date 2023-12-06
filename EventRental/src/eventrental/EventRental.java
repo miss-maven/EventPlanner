@@ -5,7 +5,10 @@
  */
 package eventrental;
 
+import java.awt.*;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 //KINDA WORKS RIGHT NOW FORCED TO PUSH WHILE WORKING ON IT
@@ -15,10 +18,10 @@ import java.util.ArrayList;
  */
 public class EventRental 
 {
-
+ 
     /**
      * @param args the command line arguments
-     */
+     */   
     public static void main(String[] args) 
     {
         // TODO code application logic here
@@ -31,7 +34,19 @@ public class EventRental
         String[] tablesChairChoice = {"Tables and Chairs", "Tables or Chairs"};
         String[] tablesOrChairsChoice = {"Tables", "Chairs"};
         String[] addMoreChoices = {"Yes", "No"};
-        JFrame message = new JFrame();
+        JFrame message = new JFrame("Receipt");
+        JTextArea receiptTextArea;
+        message.setSize(300, 400);
+        message.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // inititalize jtext component
+        receiptTextArea = new JTextArea();
+        receiptTextArea.setEditable(false);
+        // layout
+        message.setLayout(new BorderLayout());
+        // add component
+        message.add(new JScrollPane(receiptTextArea), BorderLayout.CENTER);
+        receiptTextArea.append("Event Rental Reservations");
+        //FinalFrame finalFrame = new FinalFrame();
         boolean tryAgain = true;
         do 
         {
@@ -81,16 +96,26 @@ public class EventRental
         while (tryAgain == true); 
         for (Object obj : tables)
         {
+            int i = 1;
             Table newTable = (Table) obj;
-            System.out.println("Table:" + newTable.getTableAmount());
+            receiptTextArea.append("\nPosition " + i);
+            receiptTextArea.append("\nTable: " + newTable.getTableAmount() + " $ ");
         }
         for (Object obj : chairs)
         {
+            int i = 1;
             Chair newChair = (Chair) obj;
-            System.out.println("Chair:" + newChair.getChairAmount());
+            receiptTextArea.append("\nPosition " + i);
+            receiptTextArea.append("\nChair: " + newChair.getChairAmount() + " $ ");
         }
         
-        
+        double totalAmt = 0.0;    // placeholder
+        receiptTextArea.append("\n---------------");
+        receiptTextArea.append("\nTotal: $" + totalAmt);
+        if (tryAgain == false)
+        {
+            message.setVisible(true);
+        }
     }
      public static boolean tryAgain(String[] addMoreChoices)
     {
@@ -108,4 +133,43 @@ public class EventRental
       return tryAgainBool;
     }
     
+     /*public class FinalFrame extends JFrame
+     {
+         private JTextArea receiptTextArea;
+         
+         public FinalFrame() 
+         {
+             // setting up jframe
+             setTitle("Receipt");
+             setSize(300, 400);
+             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             
+             // inititalize jtext component
+             receiptTextArea = new JTextArea();
+             receiptTextArea.setEditable(false);
+             
+             // layout
+             setLayout(new BorderLayout());
+             
+             // add component
+             add(new JScrollPane(receiptTextArea), BorderLayout.CENTER);
+             
+             // display
+             setVisible(true);
+         }
+         
+         public void addItem(String item, double price)
+         {
+             // use this method to set receipt items (chair, table)
+             receiptTextArea.append(String.format("%-20s $%.2f\n", item, price));           
+         }
+         
+         public void setTotalAmt(double total)
+         {
+             // use this method to set total
+             receiptTextArea.append("\n---------------\n");
+             receiptTextArea.append(String.format("Total: $%.2f", total));           
+         }
+         
+     }*/
 }
