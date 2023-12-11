@@ -30,8 +30,10 @@ public class EventRental
         String userChoice;
         int chairAmount;
         int tableAmount;
+        int i = 1;
         ArrayList<Table> tables = new ArrayList<>();
         ArrayList<Chair> chairs = new ArrayList<>();
+        ArrayList<Position> positions = new ArrayList<>();
         String[] tablesChairChoice = {"Tables and Chairs", "Tables or Chairs"};
         String[] tablesOrChairsChoice = {"Tables", "Chairs"};
         String[] addMoreChoices = {"Yes", "No"};
@@ -57,12 +59,16 @@ public class EventRental
                 case "Tables and Chairs":
                     Chair chairz = new Chair();
                     Table tablez = new Table();
+                    Position position = new Position();
                     chairAmount = Integer.parseInt(JOptionPane.showInputDialog(null, "How many Chairs do you need?", "Event Planner", JOptionPane.QUESTION_MESSAGE));
                     chairz.setChairAmount(chairAmount);
+                    position.setChairAmount(chairAmount);
                     tableAmount = Calculations.CalculateTableAmount(chairAmount);
                     tablez.setTableAmount(tableAmount);
+                    position.setTableAmount(tableAmount);
                     tables.add(tablez);
                     chairs.add(chairz);
+                    positions.add(position);
                     break;
                 case "Tables or Chairs":
                     userChoice = (String)JOptionPane.showInputDialog(null, "Choose Tables or Chairs", "Event Planner", JOptionPane.QUESTION_MESSAGE, null, tablesOrChairsChoice,  tablesOrChairsChoice[0]);
@@ -71,23 +77,31 @@ public class EventRental
                         case "Tables":
                             Table table = new Table();
                             Chair Chair = new Chair();
+                            Position positionz = new Position();
                             chairAmount = 0;
                             Chair.setChairAmount(chairAmount);
+                            positionz.setChairAmount(chairAmount);
                             tableAmount = Integer.parseInt(JOptionPane.showInputDialog(null, "How many Tables do you want?", "Event Planner", JOptionPane.QUESTION_MESSAGE)); //gets user input
                             table.setTableAmount(tableAmount);
+                            positionz.setTableAmount(tableAmount);
                             tables.add(table);
                             chairs.add(Chair);
+                            positions.add(positionz);
                             break;
                         
                         case "Chairs":
                             Chair chair = new Chair();
                             Table Table = new Table();
+                            Position Position = new Position();
                             tableAmount = 0;
                             Table.setTableAmount(tableAmount);
+                            Position.setTableAmount(tableAmount);
                             chairAmount = Integer.parseInt(JOptionPane.showInputDialog(null, "How many Chairs do you want?", "Event Planner", JOptionPane.QUESTION_MESSAGE)); //gets user input
                             chair.setChairAmount(chairAmount);
+                            Position.setChairAmount(chairAmount);
                             chairs.add(chair);
                             tables.add(Table);
+                            positions.add(Position);
                             break;
                     }
                     break;
@@ -95,15 +109,13 @@ public class EventRental
             tryAgain = tryAgain(addMoreChoices);
         }
         while (tryAgain == true); 
-        for (Object obj : tables)
+        for (Object obj : positions)
         {
-            Table newTable = (Table) obj;
-            receiptTextArea.append("\nTable: " + newTable.getTableAmount() + "      $");
-        }
-        for (Object obj : chairs)
-        {
-            Chair newChair = (Chair) obj;
-            receiptTextArea.append("\nChair: " + newChair.getChairAmount() + "      $");
+            receiptTextArea.append("\nPosition " + i + " $ ");
+            i++;
+            Position newPosition = (Position) obj;
+            receiptTextArea.append("\nTable: " + newPosition.getTableAmount() + " $ ");
+            receiptTextArea.append("\nChair: " + newPosition.getChairAmount() + " $ ");
         }
         
         double totalAmt = 0.0;    // placeholder
