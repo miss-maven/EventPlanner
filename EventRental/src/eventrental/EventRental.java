@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import javafx.util.Pair;
 //KINDA WORKS RIGHT NOW FORCED TO PUSH WHILE WORKING ON IT
 /**
  *
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  */
 public class EventRental 
 {
- 
+    public static int position = 0;
     /**
      * @param args the command line arguments
      */   
@@ -45,7 +46,7 @@ public class EventRental
         message.setLayout(new BorderLayout());
         // add component
         message.add(new JScrollPane(receiptTextArea), BorderLayout.CENTER);
-        receiptTextArea.append("Event Rental Reservations");
+        receiptTextArea.append("Tables and Chairs Reservations");
         //FinalFrame finalFrame = new FinalFrame();
         boolean tryAgain = true;
         do 
@@ -96,17 +97,13 @@ public class EventRental
         while (tryAgain == true); 
         for (Object obj : tables)
         {
-            int i = 1;
             Table newTable = (Table) obj;
-            receiptTextArea.append("\nPosition " + i);
-            receiptTextArea.append("\nTable: " + newTable.getTableAmount() + " $ ");
+            receiptTextArea.append("\nTable: " + newTable.getTableAmount() + "      $");
         }
         for (Object obj : chairs)
         {
-            int i = 1;
             Chair newChair = (Chair) obj;
-            receiptTextArea.append("\nPosition " + i);
-            receiptTextArea.append("\nChair: " + newChair.getChairAmount() + " $ ");
+            receiptTextArea.append("\nChair: " + newChair.getChairAmount() + "      $");
         }
         
         double totalAmt = 0.0;    // placeholder
@@ -125,6 +122,7 @@ public class EventRental
       if(tryAgain == 0)
       {
           tryAgainBool = true;
+          position += 1;
       }
       else if (tryAgain == 1)
       {
@@ -132,44 +130,4 @@ public class EventRental
       }
       return tryAgainBool;
     }
-    
-     /*public class FinalFrame extends JFrame
-     {
-         private JTextArea receiptTextArea;
-         
-         public FinalFrame() 
-         {
-             // setting up jframe
-             setTitle("Receipt");
-             setSize(300, 400);
-             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             
-             // inititalize jtext component
-             receiptTextArea = new JTextArea();
-             receiptTextArea.setEditable(false);
-             
-             // layout
-             setLayout(new BorderLayout());
-             
-             // add component
-             add(new JScrollPane(receiptTextArea), BorderLayout.CENTER);
-             
-             // display
-             setVisible(true);
-         }
-         
-         public void addItem(String item, double price)
-         {
-             // use this method to set receipt items (chair, table)
-             receiptTextArea.append(String.format("%-20s $%.2f\n", item, price));           
-         }
-         
-         public void setTotalAmt(double total)
-         {
-             // use this method to set total
-             receiptTextArea.append("\n---------------\n");
-             receiptTextArea.append(String.format("Total: $%.2f", total));           
-         }
-         
-     }*/
 }
