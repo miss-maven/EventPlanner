@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package eventrental;
-
+import java.util.ArrayList;
 /**
  *
  * @author MccarthD3455

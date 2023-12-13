@@ -19,6 +19,8 @@ import javafx.util.Pair;
  */
 public class EventRental 
 {
+    private static final double CHAIR_COST = 10.0;
+    private static final double TABLE_COST = 20.0;
     public static int position = 0;
     /**
      * @param args the command line arguments
@@ -26,6 +28,7 @@ public class EventRental
     public static void main(String[] args) 
     {
         // TODO code application logic here
+
         String choice;
         String userChoice;
         int chairAmount;
@@ -39,6 +42,7 @@ public class EventRental
         String[] addMoreChoices = {"Yes", "No"};
         JFrame message = new JFrame("Receipt");
         JTextArea receiptTextArea;
+        double totalAmt = 0.0;
         message.setSize(300, 400);
         message.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // inititalize jtext component
@@ -69,6 +73,7 @@ public class EventRental
                     tables.add(tablez);
                     chairs.add(chairz);
                     positions.add(position);
+                    totalAmt += chairAmount * CHAIR_COST + tableAmount * TABLE_COST;
                     break;
                 case "Tables or Chairs":
                     userChoice = (String)JOptionPane.showInputDialog(null, "Choose Tables or Chairs", "Event Planner", JOptionPane.QUESTION_MESSAGE, null, tablesOrChairsChoice,  tablesOrChairsChoice[0]);
@@ -87,6 +92,7 @@ public class EventRental
                             tables.add(table);
                             chairs.add(Chair);
                             positions.add(positionz);
+                            totalAmt += tableAmount * TABLE_COST;
                             break;
                         
                         case "Chairs":
@@ -102,6 +108,7 @@ public class EventRental
                             chairs.add(chair);
                             tables.add(Table);
                             positions.add(Position);
+                            totalAmt += chairAmount * CHAIR_COST;
                             break;
                     }
                     break;
@@ -111,14 +118,13 @@ public class EventRental
         while (tryAgain == true); 
         for (Object obj : positions)
         {
-            receiptTextArea.append("\nPosition " + i + " $ ");
+            receiptTextArea.append("\nPosition " + i + ":");
             i++;
             Position newPosition = (Position) obj;
-            receiptTextArea.append("\nTable: " + newPosition.getTableAmount() + " $ ");
-            receiptTextArea.append("\nChair: " + newPosition.getChairAmount() + " $ ");
+            receiptTextArea.append("\nTable: " + newPosition.getTableAmount());
+            receiptTextArea.append("\nChair: " + newPosition.getChairAmount());
         }
         
-        double totalAmt = 0.0;    // placeholder
         receiptTextArea.append("\n---------------");
         receiptTextArea.append("\nTotal: $" + totalAmt);
         if (tryAgain == false)
