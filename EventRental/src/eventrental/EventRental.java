@@ -121,8 +121,8 @@ public class EventRental
             receiptTextArea.append("\nPosition " + i + ":");
             i++;
             Position newPosition = (Position) obj;
-            receiptTextArea.append("\nTable: " + newPosition.getTableAmount());
-            receiptTextArea.append("\nChair: " + newPosition.getChairAmount());
+            receiptTextArea.append("\nTable: " + newPosition.getTableAmount() + " --- $" + (newPosition.getTableAmount()*20));
+            receiptTextArea.append("\nChair: " + newPosition.getChairAmount() + " --- $" + (newPosition.getChairAmount()*10));
         }
         
         receiptTextArea.append("\n---------------");
