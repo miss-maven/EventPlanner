@@ -1,0 +1,22 @@
+
+Position 1:
+
+Table: 2 --- $40
+
+Chair: 6 --- $60
+
+Position 2:
+
+Table: 500 --- $10000
+
+Chair: 0 --- $0
+
+Position 3:
+
+Table: 0 --- $0
+
+Chair: 500 --- $5000
+
+---------------
+
+Total: $15100.0

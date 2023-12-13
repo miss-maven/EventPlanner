@@ -6,6 +6,8 @@
 package eventrental;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -116,6 +118,7 @@ public class EventRental
             tryAgain = tryAgain(addMoreChoices);
         }
         while (tryAgain == true); 
+        PrintFile(positions, i, totalAmt);
         for (Object obj : positions)
         {
             receiptTextArea.append("\nPosition " + i + ":");
@@ -148,4 +151,26 @@ public class EventRental
       }
       return tryAgainBool;
     }
+     public static void PrintFile(ArrayList<Position> positions, int i, double totalAmt)
+     {
+      try
+      {
+          PrintWriter outputFile = new PrintWriter("reciept.txt");
+          for (Object obj : positions)
+        {
+            outputFile.println("\nPosition " + i + ":");
+            i++;
+            Position newPosition = (Position) obj;
+            outputFile.println("\nTable: " + newPosition.getTableAmount() + " --- $" + (newPosition.getTableAmount()*20));
+            outputFile.println("\nChair: " + newPosition.getChairAmount() + " --- $" + (newPosition.getChairAmount()*10));
+        }
+          outputFile.println("\n---------------");
+          outputFile.println("\nTotal: $" + totalAmt);
+          outputFile.close();
+      }
+      catch(IOException e)
+      {
+        JOptionPane.showMessageDialog(null, "Error no printy to file :( " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+      }
+     }
 }
